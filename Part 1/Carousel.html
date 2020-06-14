@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .main {
+      height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+    .main .carousel-main {
+      display: grid;
+      place-items: center;
+    }
+    .main .carousel-main .image-holder.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    .main .carousel-main .image-holder {
+      width: 300px;
+      height: 300px;
+      grid-row: 1/2;
+      grid-column: 1/2;
+      opacity: 0;
+      z-index: -1;
+    }
+    .main .carousel-main .image-holder img {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <body>
+    <div class="main">
+      <div class="carousel-main">
+        <div
+          id="img1"
+          class="image-holder active"
+          onclick="myCarouselManager(2)"
+        >
+          <img src="./assets/images/1.jpg" />
+        </div>
+        <div id="img2" class="image-holder" onclick="myCarouselManager(3)">
+          <img src="./assets/images/2.jpg" />
+        </div>
+        <div id="img3" class="image-holder" onclick="myCarouselManager(1)">
+          <img src="./assets/images/3.jpg" />
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const img1 = document.querySelector("#img1");
+    const img2 = document.querySelector("#img2");
+    const img3 = document.querySelector("#img3");
+
+    let imgIndicator = 1;
+
+    function myCarouselManager(imgNo) {
+      if (imgNo === 1) {
+        img1.classList.add("active");
+        img2.classList.remove("active");
+        img3.classList.remove("active");
+        imgIndicator++;
+      } else if (imgNo === 2) {
+        img1.classList.remove("active");
+        img2.classList.add("active");
+        img3.classList.remove("active");
+        imgIndicator++;
+      } else {
+        img1.classList.remove("active");
+        img2.classList.remove("active");
+        img3.classList.add("active");
+        imgIndicator = 1;
+      }
+    }
+
+    setInterval(() => {
+      myCarouselManager(imgIndicator);
+    }, 2000);
+  </script>
+</html>
